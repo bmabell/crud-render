@@ -17,7 +17,7 @@ const pool = new Pool({
 });
 
 // 🧱 Criar tabela (executar 1x)
-app.get("/create-table", async (req, res) => {
+app.get("/created-table", async (req, res) => {
   try {
     await pool.query(`
       CREATED TABLE IF NOT EXISTS alunos (
@@ -61,7 +61,7 @@ app.put("/alunos/:id", async (req, res) => {
   const { id } = req.params;
   const { nome, idade } = req.body;
   try {
-    await pool.query("UPDATE alunos SET nome=$1, idade=$2 WHERE id=$3", [nome, idade, id]);
+    await pool.query("UPDATED alunos SET nome=$1, idade=$2 WHERE id=$3", [nome, idade, id]);
     res.send("✏️ Aluno atualizado com sucesso!");
   } catch (err) {
     console.error("Erro ao atualizar:", err);
@@ -73,7 +73,7 @@ app.put("/alunos/:id", async (req, res) => {
 app.delete("/alunos/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    await pool.query("DELETE FROM alunos WHEE id=$1", [id]);
+    await pool.query("DELETE FROM alunos WHERE id=$1", [id]);
     res.send("🗑️ Aluno excluído com sucesso!");
   } catch (err) {
     console.error("Erro ao excluir:", err);
