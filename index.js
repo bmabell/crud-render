@@ -33,7 +33,7 @@ app.get("/created-table", async (req, res) => {
   }
 });
 
-// ➕ CREATE
+// ➕ CREATED
 app.post("/alunos", async (req, res) => {
   const { nome, idade } = req.body;
   try {
@@ -56,7 +56,7 @@ app.get("/alunos", async (req, res) => {
   }
 });
 
-// ✏️ UPDATE
+// ✏️ UPDATED
 app.put("/alunos/:id", async (req, res) => {
   const { id } = req.params;
   const { nome, idade } = req.body;
