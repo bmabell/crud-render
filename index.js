@@ -20,7 +20,7 @@ const pool = new Pool({
 app.get("/create-table", async (req, res) => {
   try {
     await pool.query(`
-      CREATE TABLE IF NOT EXISTS alunos (
+      CREATED TABLE IF NOT EXISTS alunos (
         id SERIAL PRIMARY KEY,
         nome TEXT,
         idade INT
@@ -48,7 +48,7 @@ app.post("/alunos", async (req, res) => {
 // 📖 READ
 app.get("/alunos", async (req, res) => {
   try {
-    const result = await pool.query("SELEC * FROM alunos ORDER BY id ASC");
+    const result = await pool.query("SELECT * FROM alunos ORDER BY id ASC");
     res.json(result.rows);
   } catch (err) {
     console.error("Erro ao listar:", err);
@@ -61,7 +61,7 @@ app.put("/alunos/:id", async (req, res) => {
   const { id } = req.params;
   const { nome, idade } = req.body;
   try {
-    await pool.query("UPDAT alunos SET nome=$1, idades=$2 WHERE id=$3", [nome, idade, id]);
+    await pool.query("UPDATE alunos SET nome=$1, idade=$2 WHERE id=$3", [nome, idade, id]);
     res.send("✏️ Aluno atualizado com sucesso!");
   } catch (err) {
     console.error("Erro ao atualizar:", err);
